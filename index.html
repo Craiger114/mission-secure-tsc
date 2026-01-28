@@ -1,0 +1,581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="theme-color" content="#00ffe1" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Mission Secure (Level 3 App)&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;!-- Optional (for PWA installs). Keep these if you're hosting with manifest + sw.js. --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link rel="manifest" href="./manifest.webmanifest" /&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>:root { color-scheme: dark; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>* { box-sizing: border-box; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: radial-gradient(circle at center, #00111a, #000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>h1{ margin: 8px 0 6px; font-size: 22px; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#wrap{ max-width: 980px; margin: 0 auto; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#gameBox{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:2px solid #00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: rgba(0,20,30,.9);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-shadow:0 0 20px #00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#scenario{ font-size: 18px; margin: 10px 0 14px; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#hud{ margin-top: 10px; font-size: 14px; opacity: .95; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.row{ display:flex; justify-content:center; gap:10px; flex-wrap: wrap; margin-top: 10px; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 12px 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 6px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#002b36;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid #00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor:pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>min-width: 220px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button:hover{ background:#004d40; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>button:disabled{ opacity: .45; cursor:not-allowed; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#buttons{ display:flex; flex-wrap: wrap; justify-content:center; gap: 6px; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#map{ margin-top: 10px; font-size: 14px; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.node{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 6px 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid #00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:inline-block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin: 6px 6px 0 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 999px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>white-space: nowrap;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.infected{ color:#ff4d4d; border-color:#ff4d4d; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.small{ font-size: 12px; opacity: .9; margin-top: 8px; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#toast{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position: fixed; left: 50%; transform: translateX(-50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>bottom: 16px; background: rgba(0,0,0,.78);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid #00ffe1; padding: 10px 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 12px; display:none; max-width: 92vw;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#leaderboard{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:left;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-top: 1px solid rgba(0,255,225,.25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding-top: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>table{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-collapse: collapse;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>th, td{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-bottom: 1px solid rgba(0,255,225,.2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 8px 6px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>th{ text-align:left; opacity:.95; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>/* Team name entry (no prompt()) */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#nameEntry{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(0,255,225,.25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background: rgba(0,0,0,.25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#teamNameInput{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width: min(420px, 92%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding: 10px 12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top: 8px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius: 10px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border: 1px solid #00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#00111a;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#00ffe1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>outline: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size: 14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>#teamNameInput::placeholder{ color: rgba(0,255,225,.65); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="wrap"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;🚀 Mission Secure (Level 3 App)&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="row"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;button id="startBtn"&gt;Start Mission&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;button id="dlBtn" disabled&gt;Download Leaderboard (CSV)&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;button id="installBtn" style="display:none;"&gt;Install App&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="gameBox"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="scenario"&gt;Press &lt;b&gt;Start Mission&lt;/b&gt; to begin.&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="buttons"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="hud"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>⏱ &lt;span id="time"&gt;90&lt;/span&gt;s |</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>❤️ &lt;span id="health"&gt;100&lt;/span&gt;% |</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>⭐ &lt;span id="score"&gt;0&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="map"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="nameEntry"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;b&gt;Enter Team Name&lt;/b&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="small"&gt;This avoids pop-ups (prompt) that can be blocked on managed school computers.&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;input id="teamNameInput" type="text" maxlength="30" placeholder="Team Atlas" autocomplete="off" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="row" style="margin-top:8px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;button id="saveTeamBtn" style="min-width: 220px;"&gt;Save Score&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;button id="skipSaveBtn" style="min-width: 220px;"&gt;Skip&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div id="leaderboard"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;b&gt;Leaderboard&lt;/b&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="small"&gt;Stored on this device (offline-friendly). Download anytime.&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;table id="lbTable"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Team&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;th&gt;When&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;tbody&gt;&lt;/tbody&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/table&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="row" style="margin-top:8px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;button id="resetLbBtn" style="min-width: 220px;"&gt;Reset Leaderboard&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="small"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Tip: If your CMS blocks embeds, publish this app URL and link to it. Students can open it in a browser (and install it if allowed).</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div id="toast" role="status" aria-live="polite"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>OPTIONAL PWA: install button + service worker registration</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">let deferredPrompt = null;</span></p>
+<p class="p1"><span class="s1">const installBtn = document.getElementById("installBtn");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">window.addEventListener("beforeinstallprompt", (e) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>e.preventDefault();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>deferredPrompt = e;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>installBtn.style.display = "inline-block";</span></p>
+<p class="p1"><span class="s1">});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">installBtn.addEventListener("click", async () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!deferredPrompt) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>deferredPrompt.prompt();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>await deferredPrompt.userChoice;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>deferredPrompt = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>installBtn.style.display = "none";</span></p>
+<p class="p1"><span class="s1">});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// Service worker (optional). Requires sw.js present and HTTPS hosting.</span></p>
+<p class="p1"><span class="s1">if ("serviceWorker" in navigator) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>window.addEventListener("load", () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>navigator.serviceWorker.register("./sw.js").catch(() =&gt; {});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>DOM</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">const startBtn = document.getElementById("startBtn");</span></p>
+<p class="p1"><span class="s1">const dlBtn = document.getElementById("dlBtn");</span></p>
+<p class="p1"><span class="s1">const scenarioEl = document.getElementById("scenario");</span></p>
+<p class="p1"><span class="s1">const buttonsEl = document.getElementById("buttons");</span></p>
+<p class="p1"><span class="s1">const mapEl = document.getElementById("map");</span></p>
+<p class="p1"><span class="s1">const timeEl = document.getElementById("time");</span></p>
+<p class="p1"><span class="s1">const healthEl = document.getElementById("health");</span></p>
+<p class="p1"><span class="s1">const scoreEl = document.getElementById("score");</span></p>
+<p class="p1"><span class="s1">const toastEl = document.getElementById("toast");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const nameEntryEl = document.getElementById("nameEntry");</span></p>
+<p class="p1"><span class="s1">const teamNameInput = document.getElementById("teamNameInput");</span></p>
+<p class="p1"><span class="s1">const saveTeamBtn = document.getElementById("saveTeamBtn");</span></p>
+<p class="p1"><span class="s1">const skipSaveBtn = document.getElementById("skipSaveBtn");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const leaderboardBox = document.getElementById("leaderboard");</span></p>
+<p class="p1"><span class="s1">const lbTableBody = document.querySelector("#lbTable tbody");</span></p>
+<p class="p1"><span class="s1">const resetLbBtn = document.getElementById("resetLbBtn");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Helpers</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">function toast(msg, ms = 2000) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>toastEl.textContent = msg;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>toastEl.style.display = "block";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>clearTimeout(toastEl._t);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>toastEl._t = setTimeout(() =&gt; (toastEl.style.display = "none"), ms);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function escapeHtml(s) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>return String(s).replace(/[&amp;&lt;&gt;"']/g, (c) =&gt; ({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"&amp;": "&amp;amp;",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"&lt;": "&amp;lt;",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"&gt;": "&amp;gt;",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>'"': "&amp;quot;",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>"'": "&amp;#39;"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}[c]));</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function nowIso() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>return new Date().toISOString();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Leaderboard (localStorage)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">const LB_KEY = "mission_secure_lb_v1";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function loadLeaderboard() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>try { return JSON.parse(localStorage.getItem(LB_KEY) || "[]"); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>catch { return []; }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function saveLeaderboard(lb) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>localStorage.setItem(LB_KEY, JSON.stringify(lb));</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function renderLeaderboard() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const lb = loadLeaderboard()</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.slice()</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.sort((a, b) =&gt; (b.score - a.score))</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.slice(0, 25);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>lbTableBody.innerHTML = "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>lb.forEach((e) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const tr = document.createElement("tr");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const when = new Date(e.ts);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>tr.innerHTML =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>`&lt;td&gt;${escapeHtml(e.team)}&lt;/td&gt;` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>`&lt;td&gt;${e.score}&lt;/td&gt;` +</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>`&lt;td&gt;${when.toLocaleString()}&lt;/td&gt;`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lbTableBody.appendChild(tr);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>leaderboardBox.style.display = lb.length ? "block" : "none";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>dlBtn.disabled = !lb.length;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Game content</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">const networkNodes = ["Life Support", "Comms", "Satellite", "Food System", "Navigation"];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">const scenarios = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text: "Life Support monitoring is offline!",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>options: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Check connections &amp; restart", correct: true, points: 10 },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Assume hackers; shut everything down", correct: false }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lesson: "IT Support: start with basics (power, cables, restart)."</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text: "Message received: 'URGENT—log in here to fix power levels!'",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>options: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Click the link immediately", correct: false },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Verify sender &amp; report phishing", correct: true, points: 15 }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lesson: "Cybersecurity: phishing tricks humans into giving access."</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text: "Unknown device is trying to access satellite controls.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>options: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Block traffic with the firewall", correct: true, points: 15 },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Ignore it", correct: false }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lesson: "Network defense: block suspicious traffic; reduce attack paths."</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text: "Crew member forgot their password.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>options: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Share your login so they can work", correct: false },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Reset password securely", correct: true, points: 10 }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lesson: "Access control: never share credentials; reset properly."</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>text: "Two problems: security alert + a system outage.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>options: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Fix the outage first", correct: false },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>{ text: "Handle the security alert first", correct: true, points: 20 }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lesson: "Operations: prioritize threats that could impact everything."</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1">];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Game state</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">let health = 100;</span></p>
+<p class="p1"><span class="s1">let score = 0;</span></p>
+<p class="p1"><span class="s1">let timeLeft = 90;</span></p>
+<p class="p1"><span class="s1">let timer = null;</span></p>
+<p class="p1"><span class="s1">let round = 0;</span></p>
+<p class="p1"><span class="s1">let infectedNode = null;</span></p>
+<p class="p1"><span class="s1">let gameActive = false;</span></p>
+<p class="p1"><span class="s1">let pendingEndMessage = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>UI rendering</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">function updateHUD() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>timeEl.textContent = String(timeLeft);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>healthEl.textContent = String(health);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>scoreEl.textContent = String(score);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function drawMap() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>mapEl.innerHTML = "&lt;b&gt;Network Map:&lt;/b&gt;&lt;br/&gt;";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>networkNodes.forEach((n) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const span = document.createElement("span");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>span.className = "node" + (n === infectedNode ? " infected" : "");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>span.textContent = n + (n === infectedNode ? " (INFECTED)" : "");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>mapEl.appendChild(span);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function setOptions(options) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>buttonsEl.innerHTML = "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>options.forEach((o) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const btn = document.createElement("button");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>btn.textContent = o.text;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>btn.onclick = () =&gt; onChoice(o);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>buttonsEl.appendChild(btn);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>});</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function hideNameEntry() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>nameEntryEl.style.display = "none";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>teamNameInput.value = "";</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function showNameEntry() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>nameEntryEl.style.display = "block";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>teamNameInput.focus();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Game flow</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">function startMission() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>clearInterval(timer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>timer = null;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>health = 100;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>score = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>timeLeft = 90;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>round = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>infectedNode = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gameActive = true;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>pendingEndMessage = "";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>hideNameEntry();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>leaderboardBox.style.display = "none";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>scenarioEl.innerHTML = "Mission started. Stay sharp.";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>updateHUD();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>drawMap();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>timer = setInterval(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (!gameActive) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>timeLeft--;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>updateHUD();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (timeLeft &lt;= 0) finishMission("⏱ Time’s up. Mission ended.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}, 1000);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>nextStep();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function nextStep() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!gameActive) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (health &lt;= 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>finishMission("💥 Station failed. Systems compromised.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (round &lt; scenarios.length) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const s = scenarios[round];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>scenarioEl.textContent = s.text;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>setOptions(s.options);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>drawMap();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Boss battle</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>ransomwareBoss();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function onChoice(option) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!gameActive) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Boss options</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (option.boss) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>if (option.correct) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>score += option.points || 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>updateHUD();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>toast("🎉 Contained! Isolation prevents spread; recovery can proceed.", 2400);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>finishMission("✅ Mission success. Ransomware contained.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>health = 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>updateHUD();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>toast("💥 Compromised! The attack spread across critical systems.", 2400);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>finishMission("💥 Mission failed. Ransomware spread across critical systems.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Normal scenarios</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const s = scenarios[round];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (option.correct) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>score += option.points || 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>toast("✅ Correct: " + s.lesson, 2400);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>health -= 15;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>toast("❌ Wrong: station damaged. Think like an IT/Cyber team.", 2400);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>round++;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>updateHUD();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>setTimeout(nextStep, 250);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function ransomwareBoss() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>infectedNode = networkNodes[Math.floor(Math.random() * networkNodes.length)];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>drawMap();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>scenarioEl.textContent =</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>`🦠 RANSOMWARE! ${infectedNode} is infected and encrypting files. What do you do?`;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>setOptions([</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>{ text: "Isolate/disconnect the infected system", correct: true, points: 30, boss: true },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>{ text: "Pay the ransom to restore access", correct: false, boss: true },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>{ text: "Ignore and hope it stops", correct: false, boss: true }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>]);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function finishMission(message) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!gameActive) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>gameActive = false;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>clearInterval(timer);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>timer = null;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>pendingEndMessage = message;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>buttonsEl.innerHTML = "";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>scenarioEl.textContent = message;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Ask for team name in-page (no prompt)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>showNameEntry();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function saveScore(teamName) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const team = (teamName || "").trim() || "Team";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const entry = { team, score, ts: nowIso() };</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const lb = loadLeaderboard();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>lb.push(entry);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>saveLeaderboard(lb);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>renderLeaderboard();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>hideNameEntry();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>leaderboardBox.style.display = "block";</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>// Reset infection marker after end</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>infectedNode = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>drawMap();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Downloads / reset</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">function downloadLeaderboardCsv() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const lb = loadLeaderboard();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!lb.length) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const rows = [["Team", "Score", "Timestamp"]].concat(</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lb.map((e) =&gt; [e.team, String(e.score), e.ts])</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const csv = rows</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.map((r) =&gt; r.map((cell) =&gt; `"${String(cell).replaceAll('"', '""')}"`).join(","))</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.join("\n");</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const blob = new Blob([csv], { type: "text/csv" });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>const a = document.createElement("a");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>a.href = URL.createObjectURL(blob);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>a.download = "mission_secure_leaderboard.csv";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>a.click();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function resetLeaderboard() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (!confirm("Reset leaderboard on this device?")) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>saveLeaderboard([]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>renderLeaderboard();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>toast("Leaderboard reset.", 1800);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Event wiring</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">startBtn.addEventListener("click", startMission);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">dlBtn.addEventListener("click", downloadLeaderboardCsv);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">resetLbBtn.addEventListener("click", resetLeaderboard);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">saveTeamBtn.addEventListener("click", () =&gt; saveScore(teamNameInput.value));</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">skipSaveBtn.addEventListener("click", () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>hideNameEntry();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>infectedNode = null;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>drawMap();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>leaderboardBox.style.display = loadLeaderboard().length ? "block" : "none";</span></p>
+<p class="p1"><span class="s1">});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">teamNameInput.addEventListener("keydown", (e) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (e.key === "Enter") saveScore(teamNameInput.value);</span></p>
+<p class="p1"><span class="s1">});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">/** ------------------------------------------------------------------</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>Initial render</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>*<span class="Apple-converted-space">  </span>------------------------------------------------------------------ */</span></p>
+<p class="p1"><span class="s1">renderLeaderboard();</span></p>
+<p class="p1"><span class="s1">drawMap();</span></p>
+<p class="p1"><span class="s1">updateHUD();</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
